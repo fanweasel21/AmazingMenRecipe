@@ -4,117 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bulletin Board</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-
-        #bulletin-board {
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 800px;
-        }
-
-        #post-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        #post-list li {
-            margin-bottom: 10px;
-        }
-
-        #create-post-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 30px;
-            border: 1px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 2;
-            width: 80%;
-            max-width: 600px;
-        }
-
-        #create-post-form label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        #create-post-form input,
-        #create-post-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
-        #create-post-form button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-        }
-
-        #create-post-btn {
-            background-color: #4CAF50; /* Green color */
-            color: white;
-            padding: 15px 20px; /* Increase padding for a larger button */
-            border: none;
-            cursor: pointer;
-            font-size: 16px; /* Increase font size */
-        }
-
-        #create-post-form button:hover {
-            background-color: #45a049;
-        }
-
-        #create-post-form .cancel-btn {
-            background-color: #ccc;
-            color: black;
-        }
-
-        #create-post-form .cancel-btn:hover {
-            background-color: #ddd;
-        }
-
-        #close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
 <div id="bulletin-board">
-    <h1>Bulletin Board</h1>
+    <div class="container">
+        <h1>Bulletin Board</h1>
+        <button id="create-post-btn" onclick="openModal()">Create a Post</button>
+    </div>
 
     <ul id="post-list">
         <!-- Existing posts will be added here dynamically -->
@@ -131,63 +28,15 @@
             <label for="post-content">Content:</label>
             <textarea id="post-content" name="post-content" rows="4" required></textarea>
 
-            <button type="button" id="submit-post-btn">Submit Post</button>
-            <button type="button" class="cancel-btn" onclick="closeModal()">Cancel</button>
+            <div class="buttons">
+                <button type="button" id="submit-post-btn">Submit Post</button>
+                <button type="button" id="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
         </form>
     </div>
 
-    <button id="create-post-btn" onclick="openModal()">Create a Post</button>
-
     <div id="overlay" onclick="closeModal()"></div>
-    <script>
-        function openModal() {
-            document.getElementById('create-post-modal').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('create-post-modal');
-            const overlay = document.getElementById('overlay');
-            const postTitleInput = document.getElementById('post-title');
-            const postContentInput = document.getElementById('post-content');
-
-            // Clear the form fields
-            postTitleInput.value = '';
-            postContentInput.value = '';
-
-            // Hide the create post modal and overlay
-            modal.style.display = 'none';
-            overlay.style.display = 'none';
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const postList = document.getElementById('post-list');
-            const submitPostBtn = document.getElementById('submit-post-btn');
-            const postTitleInput = document.getElementById('post-title');
-            const postContentInput = document.getElementById('post-content');
-
-            submitPostBtn.addEventListener('click', function () {
-                const postTitle = postTitleInput.value;
-                const postContent = postContentInput.value;
-
-                if (postTitle && postContent) {
-                    // Create a new post element
-                    const newPost = document.createElement('li');
-                    newPost.innerHTML = `<strong>${postTitle}</strong>`;
-
-                    // Append the new post to the post list
-                    postList.appendChild(newPost);
-
-                    // Clear the form fields
-                    postTitleInput.value = '';
-                    postContentInput.value = '';
-
-                    // Hide the create post modal and overlay
-                    closeModal();
-                }
-            });
-        });
-    </script>
+    <script type="text/javascript" src="index.js"></script>
 </div>
 </body>
 </html>
