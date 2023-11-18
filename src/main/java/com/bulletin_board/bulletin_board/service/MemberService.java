@@ -26,6 +26,11 @@ public class MemberService {
         return;
     }
 
+    public boolean login(String email, String password) {
+        Optional<Member> member = memberRepository.findByEmail(email);
+        return member.map(value -> value.getPassword().trim().equals(password)).orElse(false);
+    }
+
     /**
      * Check duplicate name
      */

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+document.addEventListener("DOMContentLoaded", function () {
     // Flags to track whether duplicate check has been performed
     var isNameChecked = false;
     var isEmailChecked = false;
