@@ -1,11 +1,18 @@
 package com.bulletin_board.bulletin_board.domain;
 
+import jakarta.persistence.*;
 
+@Entity
 public class Member {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
     private String password;
 
     public Long getId() {

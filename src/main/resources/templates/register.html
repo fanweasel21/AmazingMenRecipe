@@ -5,22 +5,30 @@
     <title>Register</title>
 </head>
 <body>
+<form id="register-form" method="post" action="/new/submit">
     <div id="name-container">
         <label for="name">Name: </label>
         <input type="text" id="name" name="name" placeholder="Enter Name">
+        <button type="button" id="check-duplicate-name-button">Check Duplicate</button>
+        <div id="name-result"></div>
     </div>
     <div id="email-container">
         <label for="email">Email: </label>
-        <input type="text" id="email" name="email" placeholder="Enter Name">
+        <input type="text" id="email" name="email" placeholder="Enter Email">
+        <button type="button" id="check-duplicate-email-button">Check Duplicate</button>
+        <div id="email-result"></div>
     </div>
     <div id="password-container">
         <label for="password">Password: </label>
-        <input type="text" id="password" name="password" placeholder="Enter Name">
+        <input type="password" id="password" name="password" placeholder="Enter Password">
     </div>
-    <div id="password-confirm-container">
-        <label for="password-confirm">Password Confirm: </label>
-        <input type="text" id="password-confirm" name="password-confirm" placeholder="Enter Name">
+    <div id="confirm-password-container">
+        <label for="confirm-password">Confirm Password: </label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Repeat Password">
     </div>
-    <button type="submit">Submit</button>
+    <button type="submit" id="submit-button">Submit</button>
+</form>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script type="text/javascript" th:src="@{/js/register.js}"></script>
 </body>
 </html>
