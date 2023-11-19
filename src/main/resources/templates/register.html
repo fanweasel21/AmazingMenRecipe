@@ -3,26 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/register.css}">
 </head>
 <body>
-<form id="register-form" method="post" action="/new/submit">
-    <div id="name-container">
+<form id="register-form" method="post" action="/register/submit">
+    <div class="label-container" id="name-container">
         <label for="name">Name: </label>
-        <input type="text" id="name" name="name" placeholder="Enter Name">
-        <button type="button" id="check-duplicate-name-button">Check Duplicate</button>
+        <div class="input-container">
+            <input type="text" id="name" name="name" placeholder="Enter Name">
+            <button type="button" class="check-duplicate-button" id="check-duplicate-name-button">Check Duplicate</button>
+        </div>
         <div id="name-result"></div>
     </div>
-    <div id="email-container">
+    <div class="label-container" id="email-container">
         <label for="email">Email: </label>
-        <input type="email" id="email" name="email" placeholder="Enter Email">
-        <button type="button" id="check-duplicate-email-button">Check Duplicate</button>
+        <div class="input-container">
+            <input type="email" id="email" name="email" placeholder="Enter Email">
+            <button type="button" class= "check-duplicate-button" id="check-duplicate-email-button">Check Duplicate</button>
+        </div>
         <div id="email-result"></div>
     </div>
-    <div id="password-container">
+    <div class="label-container" id="password-container">
         <label for="password">Password: </label>
         <input type="password" id="password" name="password" placeholder="Enter Password">
     </div>
-    <div id="confirm-password-container">
+    <div class="label-container" id="confirm-password-container">
         <label for="confirm-password">Confirm Password: </label>
         <input type="password" id="confirm-password" name="confirm-password" placeholder="Repeat Password">
     </div>

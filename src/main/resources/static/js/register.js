@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         $.ajax({
             type: "POST",
-            url: "/new/check-duplicate-" + field,
+            url: "/register/check-duplicate-" + field,
             data: { [field]: value },
             success: function (response) {
                 if (response === "Valid " + field) {
@@ -33,8 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     $(resultSelector).text(response).css("color", "red");
                 }
             },
-            error: function () {
-                alert("Error checking for duplicate " + field);
+            error: function (xhr, status, error) {
+                if (xhr.status === 409) {  // HTTP CONFLICT status
+                    $(resultSelector).text(field + " already exists").css("color", "red");
+                } else {
+                    alert("INTERNAL ERROR (" + status + ")");
+                }
             }
         });
 
@@ -66,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Unable to submit. Conditions not met:\n\n" + conditionsNotMet.join("\n"));
             return false; // Prevent form submission
         } else {
-            $("#register-form").attr("action", "/new/submit").submit();
+            $("#register-form").attr("action", "/register/submit").submit();
             alert("Registration Success!!");
             return true; // Allow form submission
         }

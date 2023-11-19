@@ -28,10 +28,14 @@ public class LoginController {
 
     @PostMapping("/")
     public ResponseEntity<String> login(@RequestBody Member member) {
-        if (memberService.login(member.getEmail(), member.getPassword())) {
-            return ResponseEntity.ok("Login successful");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Failed to login.");
+        try {
+            if (memberService.login(member.getEmail(), member.getPassword())) {
+                return ResponseEntity.ok("Login successful");
+            } else {
+                return ResponseEntity.ok("Incorrect email and/or password");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred (login)");
         }
     }
 

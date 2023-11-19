@@ -20,28 +20,36 @@ public class RegisterController {
         this.memberService = memberService;
     }
 
-    @GetMapping("/new") // register new user
+    @GetMapping("/register") // register new user
     public String register() {
         return "register";
     }
 
-    @PostMapping("/new/check-duplicate-name")
+    @PostMapping("/register/check-duplicate-name")
     @ResponseBody
     public ResponseEntity<String> checkDuplicateName(@RequestParam String name) {
-        boolean isUnique = memberService.isNameUnique(name);
-        if (isUnique) return ResponseEntity.ok("Valid name");
-        else return ResponseEntity.status(HttpStatus.CONFLICT).body("Name already exists");
+        try {
+            boolean isUnique = memberService.isNameUnique(name);
+            if (isUnique) return ResponseEntity.ok("Valid name");
+            else return ResponseEntity.ok("Invalid name");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred (checkDuplicateName)");
+        }
     }
 
-    @PostMapping("/new/check-duplicate-email")
+    @PostMapping("/register/check-duplicate-email")
     @ResponseBody
     public ResponseEntity<String> checkDuplicateEmail(@RequestParam String email) {
-        boolean isUnique = memberService.isEmailUnique(email);
-        if (isUnique) return ResponseEntity.ok("Valid email");
-        else return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
+        try {
+            boolean isUnique = memberService.isEmailUnique(email);
+            if (isUnique) return ResponseEntity.ok("Valid email");
+            else return ResponseEntity.ok("Invalid name");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred (checkDuplicateEmail)");
+        }
     }
 
-    @PostMapping("/new/submit")
+    @PostMapping("/register/submit")
     public String submitForm(@RequestParam String name, @RequestParam String email, @RequestParam String password) {
         Member member = new Member();
         member.setName(name);

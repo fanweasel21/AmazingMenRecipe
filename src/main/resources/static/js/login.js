@@ -23,18 +23,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     window.location.href = "/post";
                     return true;
                 } else {
-                    alert("Login failed");
+                    alert("Incorrect email and/or password");
                     return false;
                 }
             },
-            error: function() {
-                alert("error occurred");
+            error: function(xhr, status, error) {
+
+                if (xhr.status === 401) {
+                    alert("Email and/or Password is incorrect");
+                } else{
+                    alert("Internal Error (" + status + ")");
+                }
                 return false;
             }
         });
     }
     $(".login-button").click(function (event) {
-        console.log("login button clicked");
         if (!loginButton()) {
             event.preventDefault();
         }
